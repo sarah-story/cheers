@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace Cheers
@@ -11,28 +7,20 @@ namespace Cheers
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("Hello there! What's your name?");
-            string name = System.Console.ReadLine();
+            Console.WriteLine("Hello there! What's your name?");
+            string name = Console.ReadLine();
             Console.WriteLine("What's your birthday? MM/DD");
-            string birthday = System.Console.ReadLine();
+            string birthday = Console.ReadLine();
             ValidateDate(birthday);
             foreach(char letter in name)
             {
                 Output(letter);
-                string input = System.Console.ReadLine();
-                char givenLetter = input[0];
-                if (System.Char.ToUpper(givenLetter) != System.Char.ToUpper(letter) || input == "")
-                {
-                    System.Console.WriteLine("Let's try that again");
-                    Output(letter);
-                    input = System.Console.ReadLine();
-                    givenLetter = input[0];
-                }
+                ValidateLetterInput(System.Console.ReadLine(), letter);
             }
-            System.Console.WriteLine(Capitalize(name) + " is the best!!!!");
-            calculateDays(date);
-            System.Console.WriteLine("Press any key to exit");
-            System.Console.ReadKey();
+            Console.WriteLine(Capitalize(name) + " is GRAND!!!!");
+            CalculateDays(date);
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
 
         static void ValidateDate(string birthday)
@@ -51,7 +39,7 @@ namespace Cheers
             
         }
 
-        static void calculateDays(DateTime birthday)
+        static void CalculateDays(DateTime birthday)
         {
             DateTime currentDate = DateTime.Today;
             DateTime next = new DateTime(currentDate.Year, birthday.Month, birthday.Day);
@@ -70,6 +58,17 @@ namespace Cheers
                 Console.WriteLine("Your birthday is in " + (next - currentDate).Days + " days!!!! Happy Birthday in advance!");
             }
 
+        }
+
+        static void ValidateLetterInput(string input, char letter)
+        {
+            char givenLetter = input[0];
+            if (System.Char.ToUpper(givenLetter) != System.Char.ToUpper(letter) || input == "")
+            {
+                System.Console.WriteLine("Let's try that again");
+                Output(letter);
+                ValidateLetter(System.Console.ReadLine(), letter);
+            }
         }
 
         static string Capitalize(string name)
