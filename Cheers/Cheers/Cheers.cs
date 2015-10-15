@@ -14,8 +14,11 @@ namespace Cheers
             ValidateDate(birthday);
             foreach(char letter in name)
             {
-                Output(letter);
-                ValidateLetterInput(System.Console.ReadLine(), letter);
+                if (Char.IsLetter(letter))
+                {
+                    Output(letter);
+                    ValidateLetterInput(System.Console.ReadLine(), letter);
+                }
             }
             Console.WriteLine(Capitalize(name) + " is GRAND!!!!");
             CalculateDays(date);
@@ -63,11 +66,11 @@ namespace Cheers
         static void ValidateLetterInput(string input, char letter)
         {
             char givenLetter = input[0];
-            if (System.Char.ToUpper(givenLetter) != System.Char.ToUpper(letter) || input == "")
+            if (Char.ToUpper(givenLetter) != Char.ToUpper(letter) || input == "")
             {
-                System.Console.WriteLine("Let's try that again");
+                Console.WriteLine("Let's try that again");
                 Output(letter);
-                ValidateLetter(System.Console.ReadLine(), letter);
+                ValidateLetterInput(Console.ReadLine(), letter);
             }
         }
 
